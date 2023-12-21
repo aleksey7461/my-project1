@@ -1,21 +1,19 @@
     #include <iostream>
+    
+    #define debug
+
     using namespace std;
 
-    class myclass {
-        private:
-            int a1 = 10;
-            int b1 = 15;
-        public:
-            void printa1() {
-                cout << a1 << "\n";
-            }
-
-            void printb1() {
-                cout << b1 << "\n";
-            }
-    };
-
     int main() {
-        myclass a;
-        a.printa1();
+    #ifndef debug
+        cout << "begin\n";
+    #endif 
+        for (int i = 0; i < 5; i++) {
+            cout << i << "\n";
+        }
+    #ifndef debug
+        cout << "end\n";
+    #else 
+        cout << "debug able";
+    #endif
     }
