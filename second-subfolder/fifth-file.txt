@@ -1,4 +1,0 @@
-"fifth file text"  
-
-this file was changed in the feature branch
-
