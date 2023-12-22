@@ -1,39 +1,39 @@
-    #include <iostream>
+#include <iostream>
 
-    using namespace std;
+using namespace std;
 
-    class point {
-        private:
+class point {
+protected:
 
-        int x, y, z;
+    int x, y, z;
 
-        public:
+    public:
 
-        int getx() {
-            return x;
-        }
-
-        void setx(int x1) {
-            x = x1;
-        }
-
-        void sety(int y1) {
-            y = y1;
-        }
-
-        void print() {
-            cout << "x = " << x << "\ty = " << y << "\n \n";
-        }
-    };
-
-    int main() {
-        point a;
-        a.sety(15);
-        a.setx(10);
-        
-        int res = a.getx();
-
-        cout << res;
-
-        return 0;
+    int getx() {
+        return x;
     }
+
+    void setx(int x1) {
+        x = x1;
+    }
+
+    void sety(int y1) {
+        y = y1;
+    }
+
+    void print() {
+        cout << "x = " << x << "\ty = " << y << "\n \n";
+    }
+};
+
+int main() {
+    point a;
+    a.sety(15);
+    a.setx(10);
+        
+    int res = a.getx();
+
+    cout << res;
+
+    return 0;
+}
