@@ -5,35 +5,22 @@
     class point {
         private:
 
-        int x, y, z;
-
+        bool cv() {
+            return false;
+        }
         public:
 
-        int getx() {
-            return x;
-        }
-
-        void setx(int x1) {
-            x = x1;
-        }
-
-        void sety(int y1) {
-            y = y1;
-        }
-
-        void print() {
-            cout << "x = " << x << "\ty = " << y << "\n \n";
+        void start() {
+            bool vn = cv();
+            if (vn)
+                cout << "vjuhhhhh";
+            else
+                cout << "bee";
         }
     };
 
     int main() {
         point a;
-        a.sety(15);
-        a.setx(10);
-        
-        int res = a.getx();
-
-        cout << res;
-
+        a.start();
         return 0;
     }
