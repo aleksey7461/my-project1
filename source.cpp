@@ -41,18 +41,29 @@ public:
 class myclass {
 private:
     int* date;
+    int size;
 public:
-    myclass(int v) {
-        date = new int[v];
+    myclass(int s) {
+        this -> size = s;
+        this -> date = new int[s];
 
-        for (int i = 0; i < v; i++) {
-            date[i] = rand() % 50;
+        for (int i = 0; i < s; i++) {
+            date[i] = i;
         }
-        cout << "object date " << date[0] << "\tconstructor\n";
+        cout << "constructor has been calld\t" << this << "\n\n";
     }
+    myclass(const myclass &other) {
+        this -> size = other.size;
+        this -> date = new int [other.size];
 
+        for (int i = 0; i < other.size; i++) {
+            this -> date[i] = other.date[i];
+        }
+        cout << "copy constructor has been calld\t" << this << "\n\n";
+    }
     ~myclass() {
-        cout << "object date " << date[2] << "\tdestructor\n";
+        cout << "destructor has been calld\t" << this << "\n\n";
+        delete[] date;
     }
 };
 
@@ -62,19 +73,19 @@ void function() {
     cout << "function end running\n";
 }
 
+void foo(myclass val) {
+    cout << "foo has been calld\n";
+}
+
+myclass foo2() {
+    cout << "foo2 has been calld\n";
+    myclass t(2);
+    return t;
+}
+
 int main() {
-    point a;
-    a.setx(77);
-    a.sety(98);
-
-    point b(89, 65);
-    b.getx();
-    b.gety();
-
-    point c;
-    c.setx(7);
-    c.sety(19);
-    c.print();
-
+    myclass a(10);
+    myclass b(a);
+    //foo2();
     return 0;
 }
