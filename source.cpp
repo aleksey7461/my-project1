@@ -35,13 +35,32 @@ public:
         cout << "x = " << x << "\ty = " << y << "\n \n";
     }
 };
+class myclass {
+private:
+    int* date;
+public:
+    myclass(int v) {
+        date = new int[v];
+
+        for (int i = 0; i < v; i++) {
+            date[i] = rand() % 50;
+        }
+        cout << "object date " << date[0] << "\tconstructor\n";
+    }
+
+    ~myclass() {
+        cout << "object date " << date[2] << "\tdestructor\n";
+    }
+};
+
+void function() {
+    cout << "function begin running\n";
+    myclass a(6);
+    cout << "function end running\n";
+}
 
 int main() {
-    point a;
-    a.print();
-
-    point b(75, 191);
-    b.print();
+    function();
 
     return 0;
 }
