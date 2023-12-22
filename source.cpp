@@ -2,9 +2,20 @@
 
     using namespace std;
 
-    int main(int argc, char* argv[]) {
-        for (int i = 0; i < argc; i++) {
-            cout << argv[i] << "\n";
+    class point {
+        private:
+        int x;
+        protected:
+        int y;
+        int z;
+        public:
+        void print() {
+            cout << "x = " << x << " y = " << y << " z = " << z << "\n";
         }
+    };
+
+    int main() {
+        point a;
+        a.print();
         return 0;
     }
