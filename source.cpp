@@ -10,10 +10,13 @@ public:
     point() {
         x = 0;
         y = 0;
+        cout << this << "\tconstructor1\n\n";
+        this->setx(85);
     }
     point(int vx, int vy) {
         x = vx;
         y = vy;
+        cout << this << "\tconstructor2\n\n";
     }
     int getx() {
         return x;
@@ -23,12 +26,12 @@ public:
         return y;
     }
 
-    void setx(int x1) {
-        x = x1;
+    void setx(int x) {
+        this -> x = x;
     }
 
-    void sety(int y1) {
-        y = y1;
+    void sety(int y) {
+        this -> y = y;
     }
 
     void print() {
@@ -60,7 +63,18 @@ void function() {
 }
 
 int main() {
-    function();
+    point a;
+    a.setx(77);
+    a.sety(98);
+
+    point b(89, 65);
+    b.getx();
+    b.gety();
+
+    point c;
+    c.setx(7);
+    c.sety(19);
+    c.print();
 
     return 0;
 }
