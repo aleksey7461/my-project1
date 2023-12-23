@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
+    char const *test = "testing";
     return 0;
 }
