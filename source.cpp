@@ -1,7 +1,37 @@
 #include <iostream>
 #include <vector>
+#include <string>
 
 using namespace std;
+
+class human {
+private:
+    int age, height, weight;
+    string name, lastname;
+public:
+    void getname() {
+        cout << "your name is " << name << "\n";
+    }
+
+    void getparam() {
+        cout << "your age is\t" << age << "\n";
+        cout << "your weight is\t" << weight << "\n";
+        cout << "your heght is\t" << height << "\n";
+    }
+
+    void setparam(int w, int a, int h) {
+        cout << "weight\t";
+        cin >> w;
+        cout << "\nage\t";
+        cin >> a;
+        cout << "\nheght\t";
+        cin >> h;
+
+        weight = w;
+        height = h;
+        age = a;
+    }
+};
 
 class point {
 private:
@@ -14,11 +44,21 @@ public:
         cout << this << "\tconstructor1\n\n";
         this->setx(85);
     }
+
     point(int vx, int vy) {
         x = vx;
         y = vy;
         cout << this << "\tconstructor2\n\n";
     }
+
+    bool operator ==(const point & other) {
+            return this -> x == other.x && this -> y == other.y;
+    }
+
+    bool operator !=(const point & other) {
+            return !(this -> x == other.x && this -> y == other.y);
+    }
+
     int getx() {
         return x;
     }
@@ -107,11 +147,11 @@ myclass foo2() {
 }
 
 int main() {
-    myclass a(10);
-    myclass b(12);
-    myclass c(15);
-    a = b = c;
+    point a(5, 1);
+    point b(5, 2);
+
+    bool res = a != b;
+    cout << res;
 
     return 0;
 }
-
