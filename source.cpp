@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -38,10 +39,12 @@ public:
         cout << "x = " << x << "\ty = " << y << "\n \n";
     }
 };
+
 class myclass {
 private:
     int* date;
     int size;
+
 public:
     myclass(int s) {
         this -> size = s;
@@ -52,6 +55,7 @@ public:
         }
         cout << "constructor has been calld\t" << this << "\n\n";
     }
+
     myclass(const myclass &other) {
         this -> size = other.size;
         this -> date = new int [other.size];
@@ -61,6 +65,25 @@ public:
         }
         cout << "copy constructor has been calld\t" << this << "\n\n";
     }
+
+    myclass & operator = (const myclass &other) {
+        cout << "operator = " << this << "\n\n";
+
+        this -> size = other.size;
+
+        if (this -> date != nullptr) {
+            delete[] this -> date;
+        }
+
+        this -> date = new int[other.size];
+
+        for (int i = 0; i < other.size; i++) {
+            this -> date[i] = other.date[i];
+        }
+
+        return *this;
+    }
+
     ~myclass() {
         cout << "destructor has been calld\t" << this << "\n\n";
         delete[] date;
@@ -85,7 +108,10 @@ myclass foo2() {
 
 int main() {
     myclass a(10);
-    myclass b(a);
-    //foo2();
+    myclass b(12);
+    myclass c(15);
+    a = b = c;
+
     return 0;
 }
+
