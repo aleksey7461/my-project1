@@ -33,9 +33,19 @@ public:
     }
 };
 
+class point;
+
+class pizda {
+private:
+    int hui;
+    friend void changex(point &val, pizda &testval);
+};
+
 class point {
 private:
     int x, y, z;
+    friend void changex(point &val, pizda &testval);
+
 public:
     point() {
         x = 0;
@@ -73,7 +83,7 @@ public:
 
         return temp;
     }
-
+/*
     int getx() {
         return x;
     }
@@ -81,7 +91,7 @@ public:
     int gety() {
         return y;
     }
-
+*/
     void setx(int x) {
         this -> x = x;
     }
@@ -201,10 +211,16 @@ myclass foo2() {
     return t;
 }
 
+void changex(point &val, pizda &testval) {
+    val.x = -1;
+}
+
 int main() {
-    test a;
-    cout << a[0] << "\t";
-    a[0] = 100;
-    cout << a[0];
+    pizda b;
+    point a(78, 96);
+    a.print();
+    changex(a, b);
+    a.print();
+
     return 0;
 }
