@@ -34,9 +34,6 @@ public:
 };
 
 class point {
-
-
-=======
 private:
     int x, y, z;
 
