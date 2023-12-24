@@ -36,7 +36,6 @@ public:
 class point {
 private:
     int x, y, z;
-
 public:
     point() {
         x = 0;
@@ -94,6 +93,36 @@ public:
     void print() {
         cout << "x = " << x << "\ty = " << y << "\n \n";
     }
+
+    point & operator ++() {
+        this -> x++;
+        this -> y += 1;
+        return *this;
+    }
+
+    point operator ++(int val) {
+        point temp(*this);
+
+        this -> x++;
+        this -> y++;
+
+        return temp;
+    }
+
+    point & operator --() {
+        this -> x--;
+        this -> y -= 1;
+        return *this;
+    }
+
+    point operator --(int val) {
+        point temp(*this);
+
+        this -> x--;
+        this -> y--;
+
+        return temp;
+    }
 };
 
 class myclass {
@@ -146,6 +175,16 @@ public:
     }
 };
 
+class test {
+private:
+    int arr[5]{7, 99, 35, 43, 6};
+
+public:
+    int & operator[](int index) {
+        return arr[index];
+    }
+};
+
 void function() {
     cout << "function begin running\n";
     myclass a(6);
@@ -163,11 +202,9 @@ myclass foo2() {
 }
 
 int main() {
-    point a(5, 1);
-    point b(5, 2);
-
-    point c = a - b;
-    c.print();
-
+    test a;
+    cout << a[0] << "\t";
+    a[0] = 100;
+    cout << a[0];
     return 0;
 }
