@@ -59,6 +59,22 @@ public:
             return !(this -> x == other.x && this -> y == other.y);
     }
 
+    point operator +(const point & other) {
+        point temp;
+        temp.x = this -> x + other.x;
+        temp.y = this -> y + other.y;
+
+        return temp;
+    }
+
+    point operator -(const point & other) {
+        point temp;
+        temp.x = this -> x - other.x;
+        temp.y = this -> y - other.y;
+
+        return temp;
+    }
+
     int getx() {
         return x;
     }
@@ -150,8 +166,8 @@ int main() {
     point a(5, 1);
     point b(5, 2);
 
-    bool res = a != b;
-    cout << res;
+    point c = a - b;
+    c.print();
 
     return 0;
 }
