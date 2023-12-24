@@ -4,7 +4,33 @@
 
 using namespace std;
 
-class human {
+class Apple;
+class Human;
+
+class Human {
+public: 
+    void takeApple(Apple &apple);
+
+    void eatApple() {
+
+    }
+};
+
+class Apple {
+private:
+    int weight;
+    string color;
+
+    friend void Human::takeApple(Apple &apple);
+
+public:
+    Apple(int weight, string color) {
+        this -> weight = weight;
+        this -> color = color;
+    }
+};
+
+class human1 {
 private:
     int age, height, weight;
     string name, lastname;
@@ -33,18 +59,10 @@ public:
     }
 };
 
-class point;
-
-class pizda {
-private:
-    int hui;
-    friend void changex(point &val, pizda &testval);
-};
-
 class point {
 private:
     int x, y, z;
-    friend void changex(point &val, pizda &testval);
+    friend void changex(point &val);
 
 public:
     point() {
@@ -185,15 +203,28 @@ public:
     }
 };
 
-class test {
+class source
+{
 private:
-    int arr[5]{7, 99, 35, 43, 6};
 
 public:
-    int & operator[](int index) {
-        return arr[index];
-    }
+    source();
+    ~source();
+
+    void print();
 };
+
+source::source()
+{
+}
+
+source::~source()
+{
+}
+
+void source::print() {
+    cout << "hi bitch";
+}
 
 void function() {
     cout << "function begin running\n";
@@ -211,16 +242,19 @@ myclass foo2() {
     return t;
 }
 
-void changex(point &val, pizda &testval) {
+void changex(point &val) {
     val.x = -1;
 }
 
 int main() {
-    pizda b;
-    point a(78, 96);
-    a.print();
-    changex(a, b);
-    a.print();
+    Apple apple (250, "red");
+
+    Human human;
+    human.takeApple(apple);
 
     return 0;
+}
+
+void Human::takeApple(Apple & apple) {
+    cout << "takeApple has been called\n" << "weight \t" << apple.weight << "\ncolor \t" << apple.color << "\n";
 }
