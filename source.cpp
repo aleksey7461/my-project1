@@ -203,8 +203,7 @@ public:
     }
 };
 
-class source
-{
+class source {
 private:
 
 public:
