@@ -4,6 +4,28 @@
 
 using namespace std;
 
+class Student {
+private:
+    int ID;
+public:
+    static int Count;
+    static int StID;
+
+    Student () {
+        Count += 10;
+    }
+
+    int genID() {
+        int randCount = Count * 10;
+        ID = rand() % randCount;
+        cout << Count << "\t" << ID << "\n";
+        return 0;
+    }
+};
+
+int Student::Count = 1;
+int Student::StID = 0;
+
 class Apple;
 class Human;
 
@@ -11,9 +33,7 @@ class Human {
 public: 
     void takeApple(Apple &apple);
 
-    void eatApple() {
-
-    }
+    void eatApple(Apple &apple);
 };
 
 class Apple {
@@ -21,15 +41,23 @@ private:
     int weight;
     string color;
 
-    friend void Human::takeApple(Apple &apple);
+    friend Human;
 
 public:
+
+    static int count;
+
+
     Apple(int weight, string color) {
         this -> weight = weight;
         this -> color = color;
+        count++;
     }
 };
 
+int Apple::count = 0;
+
+/*
 class human1 {
 private:
     int age, height, weight;
@@ -109,7 +137,7 @@ public:
     int gety() {
         return y;
     }
-*/
+*
     void setx(int x) {
         this -> x = x;
     }
@@ -244,16 +272,23 @@ myclass foo2() {
 void changex(point &val) {
     val.x = -1;
 }
-
+*/
 int main() {
-    Apple apple (250, "red");
+    cout << "\n--------------------\n\n";
 
-    Human human;
-    human.takeApple(apple);
+    Student a;
+    a.genID();
+    Student b;
+    b.genID();
 
+    cout << "\n--------------------\n\n";
     return 0;
 }
 
 void Human::takeApple(Apple & apple) {
     cout << "takeApple has been called\n" << "weight \t" << apple.weight << "\ncolor \t" << apple.color << "\n";
+}
+
+void Human::eatApple(Apple & apple) {
+    apple.weight = 150;
 }
