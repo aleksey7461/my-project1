@@ -4,6 +4,7 @@
 
 using namespace std;
 
+/*
 class Student {
 private:
     int ID;
@@ -63,7 +64,7 @@ public:
 
 int Apple::count = 0;
 
-/*
+
 class human1 {
 private:
     int age, height, weight;
@@ -279,16 +280,135 @@ void changex(point &val) {
     val.x = -1;
 }
 */
+/*
+class Image {
+private:
+    static const int size = 5;
+
+    class Pixel {
+    private:
+        int r, g, b;
+    
+    public:
+        Pixel(int r, int g, int b) {
+            this -> r = r;
+            this -> b = b;
+            this -> g = g;
+        }
+
+        string getInfo() {
+            return "Pixel: r = " + to_string(r) + "\t g = " + to_string(g) + "\t b = " + to_string(b);
+        }
+    };
+
+    Pixel pix[size] {
+        Pixel(0, 19, 81),
+        Pixel(71, 94, 65),
+        Pixel(187, 5, 1),
+        Pixel(224, 3, 8),
+        Pixel(56, 97, 7)
+    };
+public:
+    void getImageInfo() {
+        for (int i = 0; i < size; i++) {
+            cout << pix[i].getInfo() << "\n";
+        }
+    }
+
+};*/
+/*
+class Cap {
+private:
+    string color = "Red";
+
+public: 
+    string getCol() {
+        return color;
+    }
+};
+
+class Human {
+private:
+    class Brain {
+    private:
+        int a, b, c;
+
+    public:
+        void Think() {
+            cout << "Human-Brain::Think\n";
+        }
+    };
+
+    Brain brain;
+    Cap cap;
+
+public:
+    void Think() {
+        brain.Think();
+    }
+
+    void inspectCap() {
+        cout << "My Cap\t" << cap.getCol();
+    }
+};
+
+class Model {
+private:
+    Cap cap;
+public:
+    void inspectModel() {
+        cout << "\ncap\t" << cap.getCol() << "\tmodel\n";
+    }
+};
+*/
+
+class Human {
+private:
+    string name = "Eban'ko";
+
+public:
+    string getName() {
+        return name;
+    }
+};
+
+class Student : public Human {
+public:
+    string group = "cx";
+    void Learn() {
+        cout << "I am learning\n";
+    }
+
+};
+
+class Professor : public Human {
+public:
+    string subject;
+
+};
+
+class ExStudent : public Student{
+private:
+
+public:
+    void Learn() {
+        cout << "Extra Student\n";
+    }
+};
 
 int main() {
     cout << "\n--------------------\n\n";
 
-
+    Student a;
+    a.Learn();
+    ExStudent b;
+    b.Learn();
+    cout << b.getName() << "\n";
 
     cout << "\n--------------------\n\n";
     return 0;
 }
-
+/*
 void Human::takeApple(Apple & apple) {
     cout << "takeApple has been called\n" << "weight \t" << apple.weight << "\ncolor \t" << apple.color << "\n";
 }
@@ -296,4 +416,5 @@ void Human::takeApple(Apple & apple) {
 void Human::eatApple(Apple & apple) {
     apple.weight = 150;
 }
-
+*/
+ 
