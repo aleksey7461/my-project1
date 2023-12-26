@@ -7,24 +7,30 @@ using namespace std;
 class Student {
 private:
     int ID;
-public:
     static int Count;
-    static int StID;
+
+public:
 
     Student () {
-        Count += 10;
+        Count++;
+        ID = Count;
     }
 
-    int genID() {
-        int randCount = Count * 10;
-        ID = rand() % randCount;
-        cout << Count << "\t" << ID << "\n";
-        return 0;
+    int getID() {
+        return ID;
     }
+
+    int getCount() {
+        return Count;
+    }
+
+    static void changeID (Student & student, int ID) {
+        student.ID = ID;
+    }
+    
 };
 
-int Student::Count = 1;
-int Student::StID = 0;
+int Student::Count = 0;
 
 class Apple;
 class Human;
@@ -273,13 +279,11 @@ void changex(point &val) {
     val.x = -1;
 }
 */
+
 int main() {
     cout << "\n--------------------\n\n";
 
-    Student a;
-    a.genID();
-    Student b;
-    b.genID();
+
 
     cout << "\n--------------------\n\n";
     return 0;
@@ -292,3 +296,4 @@ void Human::takeApple(Apple & apple) {
 void Human::eatApple(Apple & apple) {
     apple.weight = 150;
 }
+
