@@ -1,6 +1,6 @@
 #include <iostream>  //основная библиотека input-output-stream
-#include <string>    //нахер не надо
-#include <cstring>   //для strlen()
+#include <string>    //нахуй не надо, мы и так эту бибилиотеку пишем
+#include <cstring>   //для strlen(), идругой бесполезной хуйни
 
 using namespace std;
 
@@ -10,13 +10,13 @@ private:
     int size;
     
 public:
-    //конструктор без параметров
+    //конструктор без параметров =)
     mystring() {
         str = nullptr;
         size = 0;
     }
 
-    //конструктор с параметрами, передача строки в обьект
+    //конструктор с параметрами =), передача строки в обьект
     mystring(const char *str) {
         size = strlen(str); //strlen (cstring) получает кол-во символов в строке
 
@@ -72,6 +72,7 @@ public:
     }
 
     //перегрузка оператора сложения, необходима для конкатенации строк
+    //нихуя блять он сука не работает
     mystring operator+ (const mystring &other) {
 
         //создание пустого обьекта где будет храниться результат конкатенации строк, 
@@ -102,19 +103,23 @@ public:
         return newstr;
     }
 
-    //выводит в консоль строку, в лучшем случае необходима перегрузка оператора "<<", но похер, и так работает
+    //выводит в консоль строку, в лучшем случае необходима перегрузка оператора "<<"
+    //поебать, и так работает
     void print() {
-        cout << str;
+        cout << "object\t" << str << "\n";
     }
 
+    //вывод длинны строки (хуйня сраная)
     int Size() {
         return size;
     }
 
+    //другой вывод длинны строки (не хуйня, сам написал)
     int Length() {
         return strlen(str);
     }
 
+    //перегрузка оператора равенства
     bool operator ==(const mystring & other) {
         if (this -> size != other.size)
             return false;
@@ -126,24 +131,67 @@ public:
 
         return true;
     }
+
+    //перегрузка оператора неравенства
+    bool operator !=(const mystring & other) {
+        if (this -> size == other.size)
+            return true;
+        
+        for (int i = 0; i < this -> size; i++) {
+            if (this -> str[i] == other.str[i])
+                return false;
+        }
+
+        return false;
+    }
+
+    //перегрузка опреатора индекса
+    char& operator [](int index) {
+        return this -> str[index];
+    }
+
+    //еще какая-то хуйня, без которой все охуенно работает
+    mystring(mystring &&other) {
+        this -> size = other.size;
+        this -> str = other.str;
+        other.str = nullptr;
+    }
 };
 
 int main() {
-    mystring str1("x");
-    mystring str2("x");
+    cout << "\n\n";
 
-    cout << str1.Size() << "\n";
-    cout << str2.Size() << "\n";
-
-    mystring res1;
-    res1 = str1 + str2;
-
-    cout << res1.Length() << "\n";
-
-    bool equal = str1.operator==(str2);
+    mystring str1("qwe");
+    mystring str2("rty");
+    mystring res1("xyz");
+/*
+    bool equal = str1 != str2;
     if (equal)
-        cout << "true\n";
+        cout << "equal\t\ttrue\n\n";
     else
-        cout << "false\n";
+        cout << "equal\t\tfalse\n\n";
+    cout << "-----------------\n";
+
+    res1.print();
+    cout << "\n";
+    cout << "str1 size\t" << str1.Size() << "\n";
+    cout << "str2 size\t" << str2.Size() << "\n";
+
+    res1 = str1 + str2;
+    cout << "-----------------\n";
+    res1.print();
+    cout << "\n";
+
+    cout << "str1 size\t"  << str1.Size() << "\n";
+    cout << "str2 size\t"  << str2.Size() << "\n";
+    cout << "res1 size\t"  << res1.Size() << "\n";
+    cout << "res1 length\t"  << res1.Length() << "\n";
+*/
+    
+    res1 = str1 + str2;
+    res1.print();
+    cout << res1.Length();
+
+    cout << "\n\n";
     return 0;
 }
