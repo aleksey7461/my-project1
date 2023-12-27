@@ -5,30 +5,35 @@
 using namespace std;
 
 class A {
+private:
+    string mes;
 public:
     A() {
-        cout << "constructor - A\n";
+        cout << "constructor1 - A\n";
+    }
+
+    A(string mes) {
+        this -> mes = mes;
+        cout << "constructor2 - A\n";
+    }
+
+    void printMes() {
+        cout << mes << "\n";
     }
 };
 
 class B : public A {
 public:
-    B() {
-        cout << "constructor - B\n";
-    }
-};
+    B() : A("new message") {
 
-class C : public B {
-public:
-    C() {
-        cout << "constructor - C\n";
     }
 };
 
 int main() {
     cout << "\n--------------------\n\n";
 
-    C c;
+    B value;
+    value.printMes();
 
     cout << "\n--------------------\n\n";
     return 0;
