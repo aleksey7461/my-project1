@@ -4,36 +4,60 @@
 
 using namespace std;
 
-class A {
-private:
-    string mes;
+class Weapon {
 public:
-    A() {
-        cout << "constructor1 - A\n";
-    }
+    virtual void Shoot() = 0;
 
-    A(string mes) {
-        this -> mes = mes;
-        cout << "constructor2 - A\n";
-    }
-
-    void printMes() {
-        cout << mes << "\n";
+    void Foo() {
+        cout << "foo, huinya\n";
     }
 };
 
-class B : public A {
+class Gun : public Weapon {
 public:
-    B() : A("new message") {
+    void Shoot() override {
+        cout << "shoot\n";
+    }
+};
 
+class SubmachineGun : public Gun {
+public:
+    void Shoot() override {
+        cout << "shoot *3 \n";
+    }
+};
+
+class Boom : public Weapon {
+public:
+    void Shoot() override {
+        cout << "Big Boom\n";
+    }
+};
+
+class Knife : public Weapon {
+public:
+    void Shoot() override {
+        cout << "eb tvou mat' nahui!\n";
+    }
+};
+
+class Player {
+private:
+
+public:
+    void Shoot(Weapon *weapon) {
+        weapon -> Shoot();
     }
 };
 
 int main() {
     cout << "\n--------------------\n\n";
 
-    B value;
-    value.printMes();
+    Knife knife;
+    knife.Foo();
+
+    Player a;
+    a.Shoot(&knife);
 
     cout << "\n--------------------\n\n";
     return 0;
