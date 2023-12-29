@@ -1,44 +1,60 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
-class Character {
-public: 
-    Character() {
-        cout << "Character constructor\n";
-    }
-
-    int HP;
-};
-
-class Orc : public virtual Character {
+class Point {
 public:
-    Orc() {
-        cout << "Orc constructor\n";
+    int x, y, z;
+
+    Point() {
+        x = 0;
+        y = 0;
+        z = 0;
+    }
+
+    Point(int x, int y, int z) {
+        this -> x = x; 
+        this -> y = y;
+        this -> z = z;
     }
 };
 
-class Warrior : public virtual Character {
-public:
-    Warrior() {
-        cout << "Warrior constructor\n";
-    }
-};
+ostream& operator <<(ostream& os, const Point& point) {
+    os << point.x << " " << point.y << " " << point.z;
+    return os;
+}
 
-class OrcWarrior : public Orc, public Warrior {
-public:
-    OrcWarrior() {
-        cout << "OrcWarrior constructor\n";
-    }
-};
+istream& operator >>(istream& is, Point& point) {
+    is >> point.x >> point.y >> point.z;
+    return is;
+}
 
 int main() {
     cout << "\n--------------------\n\n";
 
-    OrcWarrior a;
+    string path = "MyTestFile.txt";
+    string text;
+    
+    Point a;
+
+    fstream fs;
+    fs.open(path, fstream::in | fstream::out);
+    
+    if (!fs.is_open()) {
+        cout << "FAILED\n";
+    }
+    else {
+        fs >> a;
+        cout << a << "\n";
+        cout << "\nDONE\n";
+    }
+
+    fs.close();
     
     cout << "\n--------------------\n\n";
     return 0;
 }
+;
