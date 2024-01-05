@@ -1,60 +1,44 @@
 #include <iostream>
-#include <vector>
 #include <string>
 #include <fstream>
+#include <memory>
 
 using namespace std;
 
-class Point {
+template <class T>
+class SmartPointer {
 public:
-    int x, y, z;
-
-    Point() {
-        x = 0;
-        y = 0;
-        z = 0;
+    SmartPointer(T *ptr) {
+        this -> ptr = ptr;
+        cout << "Constructor\n";
     }
 
-    Point(int x, int y, int z) {
-        this -> x = x; 
-        this -> y = y;
-        this -> z = z;
+    ~SmartPointer() {
+        delete ptr;
+        cout << "Destructor\n";
     }
+
+    T& operator *() {
+        return *ptr;
+    }
+
+private:
+    T *ptr;
 };
-
-ostream& operator <<(ostream& os, const Point& point) {
-    os << point.x << " " << point.y << " " << point.z;
-    return os;
-}
-
-istream& operator >>(istream& is, Point& point) {
-    is >> point.x >> point.y >> point.z;
-    return is;
-}
 
 int main() {
     cout << "\n--------------------\n\n";
 
-    string path = "MyTestFile.txt";
-    string text;
-    
-    Point a;
 
-    fstream fs;
-    fs.open(path, fstream::in | fstream::out);
-    
-    if (!fs.is_open()) {
-        cout << "FAILED\n";
-    }
-    else {
-        fs >> a;
-        cout << a << "\n";
-        cout << "\nDONE\n";
-    }
+    int SIZE = 3;
 
-    fs.close();
-    
+    shared_ptr<int[]> ptr(new int[SIZE] {1, 2, 3});
+
+    for (int i = 0; i < SIZE; i++) {
+        cout << ptr[i] << '\t';
+    }
+    cout << "\n";
+ 
     cout << "\n--------------------\n\n";
     return 0;
 }
-;
