@@ -1,44 +1,95 @@
 #include <iostream>
-#include <string>
-#include <fstream>
-#include <memory>
 
 using namespace std;
 
-template <class T>
-class SmartPointer {
+class List 
+{
 public:
-    SmartPointer(T *ptr) {
-        this -> ptr = ptr;
-        cout << "Constructor\n";
-    }
+    List();
+    ~List();
 
-    ~SmartPointer() {
-        delete ptr;
-        cout << "Destructor\n";
-    }
-
-    T& operator *() {
-        return *ptr;
-    }
+    void push_back(int data);
+    int GetSize() { return Size; }
+    int& operator [](const int index);
 
 private:
-    T *ptr;
+    struct Node 
+    {
+        Node *Next;
+        int data;
+
+        Node(int data = int(), Node *Next = nullptr)
+        {
+            this -> data = data;
+            this -> Next = Next;
+        }
+    };
+
+    Node *head;
+    int Size;
 };
+
+List::List() 
+{
+    Size = 0;
+    head = nullptr;
+}
+
+List::~List() 
+{
+
+}
+
+void List::push_back(int data) 
+{
+    if (head == nullptr) 
+    {
+        head = new Node(data);
+    }
+
+    else 
+    {
+        Node *current = this -> head;
+        while (current -> Next != nullptr) 
+        {
+            current = current -> Next;
+        }
+
+        current -> Next = new Node(data);
+    }
+    Size++;
+}
 
 int main() {
     cout << "\n--------------------\n\n";
 
+    List lst;
+    lst.push_back(9);
+    lst.push_back(8);
+    lst.push_back(7);
 
-    int SIZE = 3;
-
-    shared_ptr<int[]> ptr(new int[SIZE] {1, 2, 3});
-
-    for (int i = 0; i < SIZE; i++) {
-        cout << ptr[i] << '\t';
-    }
-    cout << "\n";
+    cout << lst[2] << "\n";
  
     cout << "\n--------------------\n\n";
     return 0;
 }
+
+int & List::operator[](const int index) 
+{
+    int counter = 0;
+    int *s = new int(0);
+
+    Node *current = this -> head;
+
+    while (current != nullptr)
+    {
+        if (counter == index) 
+        {
+            return current -> data;
+        }
+        current = current
+        counter++;
+    }
+    return *s;
+}
+ 
