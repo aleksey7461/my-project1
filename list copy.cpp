@@ -11,32 +11,34 @@ public:
 
     void insert(int val, int index);
     void remove(int index);
-
     void push_back(int data);
     void push_front(int data);
-
     void pop_back();
     void pop_front();
-
     void clear();
 
     int & operator [](const int index);
-
     int GetSize() { return Size; }
 
 private:
     struct Node 
     {
+        
+
         Node *Next;
+        Node *Prev;
+
         int data;
 
-        Node(int data = int(), Node *Next = nullptr)
+        Node(int data = int(), Node *Next = nullptr, Node *Prev = nullptr)
         {
             this -> data = data;
             this -> Next = Next;
+            this -> Prev = Prev;
         }
     };
 
+    Node *tail;
     Node *head;
     int Size;
 };
@@ -45,6 +47,7 @@ List::List()
 {
     Size = 0;
     head = nullptr;
+    tail = nullptr;
 }
 
 List::~List() 
@@ -99,52 +102,52 @@ void List::push_back(int data)
 {
     if (head == nullptr) 
     {
-        head = new Node(data);
+        head = tail = new Node(data);
     }
 
     else 
     {
-        Node *current = head;
-        while (current -> Next != nullptr) 
-        {
-            current = current -> Next;
-        }
-
-        current -> Next = new Node(data);
+        Node *current = new Node(data);
+        tail -> Next = current;
+        current -> Prev = tail; 
+        tail = current;
     }
     Size++;
 }
 
 void List::push_front(int data) 
 {
-    head = new Node(data, head);
+    head = tail = new Node(data);
     Size++;
 
 }
 
 void List::pop_back()
 {
-    if (head != nullptr) 
-    {
-        Node *current = head;
-        while (current -> Next != nullptr) 
-        {
-            current = current -> Next;
-        }
+    Node *current = tail;
+    tail = tail -> Prev;
+    tail -> Next = nullptr;
 
-        delete current -> Next;
-    }
+    delete current;
+
     Size--;
 }
 
-void List::pop_front()    
+void List::pop_front() 
 {
+    if (Size == 1) 
+    {
+        delete head;
+    }
+    else
+    {
     Node *temp = head;
-
     head = head -> Next;
+    head -> Prev = nullptr;
 
     delete temp;
-
+    }
+    
     Size--;
 }
 
@@ -159,19 +162,26 @@ void List::clear()
 int & List::operator[](const int index) 
 {
     int counter = 0;
-    int *s = new int(7);
+    int *s = new int(-1);
     int &m = *s;
 
-    Node *current = this -> head;
-
-    while (counter < Size)
+    if (index >= Size/2) 
     {
-        if (counter == index) 
+        
+    }
+    else
+    {
+        Node *current = this -> head;
+
+        while (counter < Size)
         {
-            return current -> data;
+            if (counter == index) 
+            {
+                return current -> data;
+            }
+            current = current -> Next;
+            counter++;
         }
-        current = current -> Next;
-        counter++;
     }
     return m;
 }
@@ -181,16 +191,17 @@ int main()
     cout << "\n------------------------\n\n";
 
     List lst;
-    lst.push_back(7);
+    lst.push_back(5);
     lst.push_back(0);
-    lst.push_back(18);
+    lst.push_back(1);
 
     for (int i = 0; i < lst.GetSize(); i++) {  
         cout << lst[i] << '\t';
     }
 
-    lst.remove(1);
-    cout << "\n\n";
+    lst.pop_front();
+    lst.pop_back();
+    cout << endl;
 
     for (int i = 0; i < lst.GetSize(); i++) {  
         cout << lst[i] << '\t';
